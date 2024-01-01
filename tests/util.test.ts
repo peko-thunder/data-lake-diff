@@ -1,5 +1,5 @@
 import { assertEquals } from "std/testing/asserts.ts"
-import { getIndex, getKeys, hasOwnProperty } from "../src/util.ts"
+import { getIndex, getKeys, hasOwnProperty } from "../mod/util.ts"
 
 const object = {
   date: new Date("2023-12-01"),

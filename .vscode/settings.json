@@ -10,6 +10,9 @@
     }
   ],
   "[typescript]": { "editor.defaultFormatter": "denoland.vscode-deno" },
+  "[markdown]": {
+    "editor.defaultFormatter": null
+  },
   "deno.suggest.imports.hosts": {
     "https://deno.land": true
   },

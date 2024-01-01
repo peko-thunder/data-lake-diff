@@ -1,7 +1,7 @@
 import { assertEquals } from "std/testing/asserts.ts"
 import { oldDataList } from "./data/old.ts"
 import { newDataList } from "./data/new.ts"
-import { diff, getKeyMap, mergeKeySet } from "../src/index.ts"
+import { diff, getKeyMap, mergeKeySet } from "../mod/diff.ts"
 
 Deno.test("diff", () => {
   const result = diff({

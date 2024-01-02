@@ -219,6 +219,8 @@ npm install -g @commitlint/cli @commitlint/config-conventional
 
 > https://blog.cybozu.io/entry/2023/10/11/110000
 
+公開バージョンを指定することができる
+
 ```bash
-deno task build-npm
+deno task build-npm ${version}
 ```

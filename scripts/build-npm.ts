@@ -13,9 +13,17 @@ await build({
     deno: true,
   },
   package: {
-    name: "data-lake-diff",
+    name: "record-diff",
     version: Deno.args[0],
+    description: "Take the difference between old and new.",
     license: "MIT",
+    repository: {
+      type: "git",
+      url: "git+https://github.com/peko-thunder/record-diff-npm.git",
+    },
+    bugs: {
+      url: "https://github.com/peko-thunder/record-diff-npm/issues",
+    },
   },
   postBuild() {
     Deno.copyFileSync("LICENSE", "npm/LICENSE")

@@ -13,16 +13,16 @@ await build({
     deno: true,
   },
   package: {
-    name: "record-diff",
+    name: "diff-unique-record",
     version: Deno.args[0],
     description: "Take the difference between old and new.",
     license: "MIT",
     repository: {
       type: "git",
-      url: "git+https://github.com/peko-thunder/record-diff-npm.git",
+      url: "git+https://github.com/peko-thunder/diff-unique-record.git",
     },
     bugs: {
-      url: "https://github.com/peko-thunder/record-diff-npm/issues",
+      url: "https://github.com/peko-thunder/diff-unique-record/issues",
     },
   },
   postBuild() {

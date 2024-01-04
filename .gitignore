@@ -1,2 +1,3 @@
-coverage/
-npm/
+coverage/*
+npm/*
+!npm/README.md

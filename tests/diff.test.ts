@@ -16,13 +16,13 @@ Deno.test("diff", () => {
       new: { date: "2023-12-01", name: "rate", value: 30 },
       keys: [
         {
-          key: "date",
+          name: "date",
           type: "unchanged",
           old: "2023-12-01",
           new: "2023-12-01",
         },
-        { key: "name", type: "unchanged", old: "rate", new: "rate" },
-        { key: "value", type: "updated", old: 20, new: 30 },
+        { name: "name", type: "unchanged", old: "rate", new: "rate" },
+        { name: "value", type: "updated", old: 20, new: 30 },
       ],
     },
     {
@@ -31,13 +31,13 @@ Deno.test("diff", () => {
       new: { date: "2023-12-01", name: "sales", value: 100 },
       keys: [
         {
-          key: "date",
+          name: "date",
           type: "unchanged",
           old: "2023-12-01",
           new: "2023-12-01",
         },
-        { key: "name", type: "unchanged", old: "sales", new: "sales" },
-        { key: "value", type: "unchanged", old: 100, new: 100 },
+        { name: "name", type: "unchanged", old: "sales", new: "sales" },
+        { name: "value", type: "unchanged", old: 100, new: 100 },
       ],
     },
     {
@@ -58,15 +58,15 @@ Deno.test("diff", () => {
       new: { date: "2023-12-04", name: "sales", value: 70, newtmp: "test" },
       keys: [
         {
-          key: "date",
+          name: "date",
           type: "unchanged",
           old: "2023-12-04",
           new: "2023-12-04",
         },
-        { key: "name", type: "unchanged", old: "sales", new: "sales" },
-        { key: "value", type: "updated", old: 90, new: 70 },
-        { key: "oldtmp", type: "removed", old: "test", new: undefined },
-        { key: "newtmp", type: "added", old: undefined, new: "test" },
+        { name: "name", type: "unchanged", old: "sales", new: "sales" },
+        { name: "value", type: "updated", old: 90, new: 70 },
+        { name: "oldtmp", type: "removed", old: "test", new: undefined },
+        { name: "newtmp", type: "added", old: undefined, new: "test" },
       ],
     },
   ])

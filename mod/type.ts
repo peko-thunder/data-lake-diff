@@ -10,13 +10,47 @@ export interface DiffParam<O extends object, N extends object> {
 /**
  * 新旧オブジェクトを比較した結果
  */
-export interface DiffResult<O extends object, N extends object> {
+export type DiffResult<O extends object, N extends object> =
+  | AddedDiffResult<O, N>
+  | RemovedDiffResult<O, N>
+  | ExistedDiffResult<O, N>
+
+/**
+ * 比較結果のベースインターフェース
+ */
+export interface DiffResultBase<O extends object, N extends object> {
   type: DiffType
   keys: DiffKey<O, N>[]
-  // TODO: deep object やarrayの対応をするかどうか 一旦はシンプルな作りにする
-  // test: O[keyof O] extends object ? DiffObject<O, N> : DiffKey<O, N>[]
-  old?: O
-  new?: N
+}
+
+/**
+ * 追加判定の比較結果
+ */
+export interface AddedDiffResult<O extends object, N extends object>
+  extends DiffResultBase<O, N> {
+  type: "added"
+  old: undefined
+  new: N
+}
+
+/**
+ * 削除判定の比較結果
+ */
+export interface RemovedDiffResult<O extends object, N extends object>
+  extends DiffResultBase<O, N> {
+  type: "removed"
+  old: O
+  new: undefined
+}
+
+/**
+ * 既存判定の比較結果
+ */
+export interface ExistedDiffResult<O extends object, N extends object>
+  extends DiffResultBase<O, N> {
+  type: "updated" | "unchanged"
+  old: O
+  new: N
 }
 
 /**
@@ -28,7 +62,7 @@ export type DiffType = "added" | "removed" | "updated" | "unchanged"
  * 新旧オブジェクト内のkeyを比較した結果
  */
 export interface DiffKey<O extends object, N extends object> {
-  key: keyof O | keyof N
+  name: keyof O | keyof N
   type: DiffType
   old?: O[keyof O]
   new?: N[keyof N]

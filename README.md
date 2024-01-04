@@ -1,155 +1,11 @@
 # diff-unique-record
 
-データレイクなど膨大なデータの中から差分を求められることが多々ある。
-これはオブジェクト型の配列データを新旧で比較して、その差分をプログラムで確認するためのツールです。
+データレイクなどの膨大なデータの管理業務を行っていると、調査などでデータの新旧差分を出したい時がある。
+新旧のオブジェクト型の配列データを比較して、その差分をプログラムで確認するためのツールです。
 
-注意点として階層の深いオブジェクトや配列には現時点で対応していません。
+階層の深いオブジェクトや配列には対応しておらず、単一階層のレコードを比較することを想定しています。
 
-## diffサンプル
-
-実際に新旧のデータを投入して差分を抽出した結果です。
-
-### 差分取得方法
-
-新旧のデータで共通したユニークな`keys`を設定することで比較を行っています。サンプルでは`date`,`name`の組み合わせをユニークと定義しています。
-
-```typescript
-const result = diff({
-  old: oldDataList,
-  new: newDataList,
-  keys: ["date", "name"],
-})
-```
-
-### oldDataList
-
-```javascript
-const oldDataList = [
-  // object/key unchanged
-  {
-    date: "2023-12-01",
-    name: "sales",
-    value: 100,
-  },
-  // object/key updated
-  {
-    date: "2023-12-01",
-    name: "rate",
-    value: 20,
-  },
-  // object removed
-  {
-    date: "2023-12-02",
-    name: "sales",
-    value: 80,
-  },
-  // key removed/added
-  {
-    date: "2023-12-04",
-    name: "sales",
-    value: 90,
-    oldtmp: "test",
-  },
-]
-```
-
-### newDataList
-
-```javascript
-const newDataList = [
-  // object/key unchanged
-  {
-    date: "2023-12-01",
-    name: "sales",
-    value: 100,
-  },
-  // object/key updated
-  {
-    date: "2023-12-01",
-    name: "rate",
-    value: 30,
-  },
-  // object added
-  {
-    date: "2023-12-03",
-    name: "sales",
-    value: 90,
-  },
-  // key removed/added
-  {
-    date: "2023-12-04",
-    name: "sales",
-    value: 70,
-    newtmp: "test",
-  },
-]
-```
-
-### results
-
-```javascript
-const results = [
-  {
-    type: "updated",
-    old: { date: "2023-12-01", name: "rate", value: 20 },
-    new: { date: "2023-12-01", name: "rate", value: 30 },
-    keys: [
-      {
-        key: "date",
-        type: "unchanged",
-        old: "2023-12-01",
-        new: "2023-12-01",
-      },
-      { key: "name", type: "unchanged", old: "rate", new: "rate" },
-      { key: "value", type: "updated", old: 20, new: 30 },
-    ],
-  },
-  {
-    type: "unchanged",
-    old: { date: "2023-12-01", name: "sales", value: 100 },
-    new: { date: "2023-12-01", name: "sales", value: 100 },
-    keys: [
-      {
-        key: "date",
-        type: "unchanged",
-        old: "2023-12-01",
-        new: "2023-12-01",
-      },
-      { key: "name", type: "unchanged", old: "sales", new: "sales" },
-      { key: "value", type: "unchanged", old: 100, new: 100 },
-    ],
-  },
-  {
-    type: "removed",
-    old: { date: "2023-12-02", name: "sales", value: 80 },
-    new: undefined,
-    keys: [],
-  },
-  {
-    type: "added",
-    old: undefined,
-    new: { date: "2023-12-03", name: "sales", value: 90 },
-    keys: [],
-  },
-  {
-    type: "updated",
-    old: { date: "2023-12-04", name: "sales", value: 90, oldtmp: "test" },
-    new: { date: "2023-12-04", name: "sales", value: 70, newtmp: "test" },
-    keys: [
-      {
-        key: "date",
-        type: "unchanged",
-        old: "2023-12-04",
-        new: "2023-12-04",
-      },
-      { key: "name", type: "unchanged", old: "sales", new: "sales" },
-      { key: "value", type: "updated", old: 90, new: 70 },
-      { key: "oldtmp", type: "removed", old: "test", new: undefined },
-      { key: "newtmp", type: "added", old: undefined, new: "test" },
-    ],
-  },
-]
-```
+使い方はこちらの[ドキュメント](./npm/README.md)を参照ください。
 
 ## Deno環境テンプレート
 
@@ -223,4 +79,5 @@ npm install -g @commitlint/cli @commitlint/config-conventional
 
 ```bash
 deno task build-npm ${version}
+npm publish ./npm
 ```

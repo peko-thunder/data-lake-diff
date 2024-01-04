@@ -18,6 +18,7 @@ export const diff = <O extends object, N extends object>(
     const newData = newKeyMap.get(key)
     const diffKey = getDiffKey(oldData, newData)
 
+    // Map.get() がundefinedの場合はデータ自体が存在しない
     let diffType: DiffType = "unchanged"
     if (oldData === undefined && newData) diffType = "added"
     if (oldData && newData === undefined) diffType = "removed"
@@ -28,7 +29,7 @@ export const diff = <O extends object, N extends object>(
       old: oldData,
       new: newData,
       keys: diffKey,
-    }
+    } as DiffResult<O, N>
   })
 
   return results
@@ -103,7 +104,7 @@ export const getDiffKey = <O extends object, N extends object>(
     if (oldIndex.value === newIndex.value) diffType = "unchanged"
 
     return {
-      key,
+      name: key,
       type: diffType,
       old: oldIndex.value,
       new: newIndex.value,

@@ -25,6 +25,8 @@ github
 
 Docker環境でDonoを使ってもVSCodeでリンターを動かすため、PCにもDenoのインストールが必要となる。個別にインストールすること。
 
+有効化(Enable)する時はglobalではなくDenoを使うworkspaceのみにすること
+
 公式参照
 
 > https://docs.deno.com/runtime/manual/getting_started/installation
